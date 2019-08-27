@@ -2,27 +2,42 @@ let wins = 0
 let losses = 0
 let guessesLeft = 9
 let guessesSoFar = 0
-let arrayOfLettersToGuess = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-
+let arrayOfLettersToGuess = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+let guessedLetters = ``
 document.getElementById('Title').innerHTML = `
     <h1>Psychic Game!</h1>
 
 `
 
  let mysteryLetter = (arrayOfLettersToGuess[Math.floor(Math.random() * 26)])
-console.log(mysteryLetter)
+ console.log(mysteryLetter)
  document.onkeyup = function (event) {
      if (event.keyCode >= 65 && event.keyCode <= 90){
-         if (event.target.value === mysteryLetter) {
+         if (event.key === mysteryLetter) {
              wins = wins + 1
              document.getElementById(`wins`).innerHTML = wins
-             }
-         
-     }
- }
-
-
-
+             document.getElementById(`guessedLetters`).innerHTML = ``
+             mysteryLetter = (arrayOfLettersToGuess[Math.floor(Math.random() * 26)])
+             document.getElementById(`guessesLeft`).innerHTML = 9
+             console.log(mysteryLetter)
+             } 
+             else { 
+                 guessedLetters = guessedLetters + event.key + `, ` 
+                 document.getElementById(`guessedLetters`).innerHTML = guessedLetters 
+                 guessesLeft = guessesLeft - 1
+                 document.getElementById('guessesLeft').innerHTML = guessesLeft
+                 if (guessesLeft === 0) {
+                     losses = losses + 1
+                     document.getElementById(`losses`).innerHTML = losses
+                     guessesLeft = 9
+                     document.getElementById(`guessedLetters`).innerHTML = ``
+                     mysteryLetter = (arrayOfLettersToGuess[Math.floor(Math.random() * 26)])
+                     console.log(mysteryLetter)
+                 }
+             }    
+        }
+    }
+     
 
 // need to generate a random letter
 
