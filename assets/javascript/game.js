@@ -2,8 +2,8 @@ let wins = 0
 let losses = 0
 let guessesLeft = 9
 let guessesSoFar = 0
-let arrayOfLettersToGuess = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-let guessedLetters = ``
+const arrayOfLettersToGuess = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+let guessedLetters = []
 document.getElementById('Title').innerHTML = `
     <h1>Psychic Game!</h1>
 
@@ -16,13 +16,16 @@ document.getElementById('Title').innerHTML = `
          if (event.key === mysteryLetter) {
              wins = wins + 1
              document.getElementById(`wins`).innerHTML = wins
-             document.getElementById(`guessedLetters`).innerHTML = ``
+             guessedLetters = ``
+             document.getElementById(`guessedLetters`).innerHTML = guessedLetters
              mysteryLetter = (arrayOfLettersToGuess[Math.floor(Math.random() * 26)])
+             guessesLeft = 9
              document.getElementById(`guessesLeft`).innerHTML = 9
              console.log(mysteryLetter)
              } 
              else { 
                  guessedLetters = guessedLetters + event.key + `, ` 
+                 guessedLetters.includes(event.key)
                  document.getElementById(`guessedLetters`).innerHTML = guessedLetters 
                  guessesLeft = guessesLeft - 1
                  document.getElementById('guessesLeft').innerHTML = guessesLeft
@@ -30,7 +33,8 @@ document.getElementById('Title').innerHTML = `
                      losses = losses + 1
                      document.getElementById(`losses`).innerHTML = losses
                      guessesLeft = 9
-                     document.getElementById(`guessedLetters`).innerHTML = ``
+                     guessedLetters = ``
+                     document.getElementById(`guessedLetters`).innerHTML = guessedLetters
                      mysteryLetter = (arrayOfLettersToGuess[Math.floor(Math.random() * 26)])
                      console.log(mysteryLetter)
                  }
